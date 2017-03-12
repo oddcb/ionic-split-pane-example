@@ -19,7 +19,7 @@ export class SplitPage {
   @ViewChild("content") contentCtrl: NavController;
 
   constructor(private splitCommunication: SplitCommunication) {
-    this.splitCommunication.subject$.subscribe((page) => {
+    this.splitCommunication.rootSubject$.subscribe((page) => {
       console.info(`Displaying ${page}`);
       switch (page) {
         case 'home':
@@ -30,6 +30,21 @@ export class SplitPage {
           break;
         default:
           this.contentCtrl.setRoot(ContactPage);
+          break;
+      }
+    });
+
+    this.splitCommunication.pushSubject$.subscribe((page) => {
+      console.info(`Displaying ${page}`);
+      switch (page) {
+        case 'home':
+          this.contentCtrl.push(HomePage);
+          break;
+        case 'about':
+          this.contentCtrl.push(AboutPage);
+          break;
+        default:
+          this.contentCtrl.push(ContactPage);
           break;
       }
     })

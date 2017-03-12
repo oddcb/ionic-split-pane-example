@@ -14,6 +14,7 @@ export class MenuLevel1 {
 
   viewLevel2() {
     this.navCtrl.push(MenuLevel2);
-    this.splitCommunication.viewPage('contact')
+    this.splitCommunication.setRootPage('contact')
   }
 }
+

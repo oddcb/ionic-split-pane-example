@@ -1,5 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {SplitCommunication} from "./SplitCommunication";
+import {NavController} from "ionic-angular";
+import {MenuLevel3} from "./MenuLevel3";
 @Component({
   selector: 'menu-level2',
   templateUrl: 'MenuLevel2.html'
@@ -7,22 +9,25 @@ import {SplitCommunication} from "./SplitCommunication";
 export class MenuLevel2 {
 
 
-  constructor(private splitCom:SplitCommunication) {
+  constructor(private splitCom:SplitCommunication, private navCtrl:NavController) {
 
   }
 
   viewHome() {
     console.info("View the home page");
-    this.splitCom.viewPage('home');
+    this.navCtrl.push(MenuLevel3);
+    this.splitCom.setRootPage('home');
   }
 
   viewAbout() {
     console.info("View the about page");
-    this.splitCom.viewPage('about');
+    this.navCtrl.push(MenuLevel3);
+    this.splitCom.setRootPage('about');
   }
 
   viewContact() {
     console.info("View the contact page");
-    this.splitCom.viewPage('contact');
+    this.navCtrl.push(MenuLevel3);
+    this.splitCom.setRootPage('contact');
   }
 }

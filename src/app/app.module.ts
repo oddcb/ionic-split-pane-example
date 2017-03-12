@@ -9,6 +9,7 @@ import {SplitPage} from "../pages/split/split";
 import {MenuLevel1} from "../pages/split/MenuLevel1";
 import {MenuLevel2} from "../pages/split/MenuLevel2";
 import {SplitCommunication} from "../pages/split/SplitCommunication";
+import {MenuLevel3} from "../pages/split/MenuLevel3";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {SplitCommunication} from "../pages/split/SplitCommunication";
     TabsPage,
     SplitPage,
     MenuLevel1,
-    MenuLevel2
+    MenuLevel2,
+    MenuLevel3
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -33,7 +35,8 @@ import {SplitCommunication} from "../pages/split/SplitCommunication";
     TabsPage,
     SplitPage,
     MenuLevel1,
-    MenuLevel2
+    MenuLevel2,
+    MenuLevel3
   ],
   providers: [
     SplitCommunication,

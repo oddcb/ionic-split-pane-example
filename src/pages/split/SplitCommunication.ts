@@ -4,10 +4,17 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class SplitCommunication {
 
-  subject = new Subject<any>();
-  subject$ = this.subject.asObservable();
+  rootSubject = new Subject<any>();
+  rootSubject$ = this.rootSubject.asObservable();
 
-  viewPage(page:string) {
-    this.subject.next(page);
+  pushSubject = new Subject<any>();
+  pushSubject$ = this.pushSubject.asObservable();
+
+  setRootPage(page:string) {
+    this.rootSubject.next(page);
+  }
+
+  pushPage(page:string) {
+    this.pushSubject.next(page);
   }
 }
