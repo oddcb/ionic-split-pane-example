@@ -9,6 +9,7 @@ import {SplitCommunication} from "./SplitCommunication";
 export class MenuLevel1 {
   level2 = MenuLevel2;
 
+  @Input() content;
 
   constructor(private navCtrl:NavController, private splitCommunication:SplitCommunication) {}
 
