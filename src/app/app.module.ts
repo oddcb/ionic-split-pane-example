@@ -10,6 +10,7 @@ import {MenuLevel1} from "../pages/split/MenuLevel1";
 import {MenuLevel2} from "../pages/split/MenuLevel2";
 import {SplitCommunication} from "../pages/split/SplitCommunication";
 import {MenuLevel3} from "../pages/split/MenuLevel3";
+import {SplitPage2} from "../pages/split2/split";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {MenuLevel3} from "../pages/split/MenuLevel3";
     HomePage,
     TabsPage,
     SplitPage,
+    SplitPage2,
     MenuLevel1,
     MenuLevel2,
     MenuLevel3
@@ -34,6 +36,7 @@ import {MenuLevel3} from "../pages/split/MenuLevel3";
     HomePage,
     TabsPage,
     SplitPage,
+    SplitPage2,
     MenuLevel1,
     MenuLevel2,
     MenuLevel3

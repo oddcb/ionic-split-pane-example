@@ -2,7 +2,7 @@ import {Component, ViewChild} from "@angular/core";
 import {MenuLevel1} from "./MenuLevel1";
 import {HomePage} from "../home/home";
 import {SplitCommunication} from "./SplitCommunication";
-import {NavController} from "ionic-angular";
+import {MenuController, NavController} from "ionic-angular";
 import {AboutPage} from "../about/about";
 import {ContactPage} from "../contact/contact";
 
@@ -18,7 +18,7 @@ export class SplitPage {
   @ViewChild("sideMenu") sideMenuCtrl: NavController;
   @ViewChild("content") contentCtrl: NavController;
 
-  constructor(private splitCommunication: SplitCommunication) {
+  constructor(private splitCommunication: SplitCommunication, private menuCtrl:MenuController) {
     this.splitCommunication.rootSubject$.subscribe((page) => {
       console.info(`Displaying ${page}`);
       switch (page) {
@@ -55,5 +55,11 @@ export class SplitPage {
     this.sideMenuCtrl.setRoot(MenuLevel1);
     this.contentCtrl.setRoot(HomePage);
   }
+
+  ionViewDidEnter() {
+    // This have to be present to get menu to display after navigation between other tabs with menus
+    //this.menuCtrl.enable(true, "menu1");
+  }
+
 
 }
