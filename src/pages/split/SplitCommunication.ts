@@ -20,8 +20,4 @@ export class SplitCommunication {
   pushPage(page:string) {
     this.pushSubject.next(page);
   }
-
-  invokeSetAppComponentRoot() {
-    this.setAppComponentRoot.next(true);
-  }
 }
