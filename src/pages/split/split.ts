@@ -74,7 +74,7 @@ export class SplitPage {
 
   ionViewDidEnter() {
     // This have to be present to get menu to display after navigation between other tabs with menus
-    //this.menuCtrl.enable(true, "menu1");
+    this.menuCtrl.enable(true, "menu1");
   }
 
 

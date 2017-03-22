@@ -26,7 +26,7 @@ export class SplitPage2 {
   constructor(private splitCommunication: SplitCommunication, private menuCtrl: MenuController) {}
 
   ionViewWillEnter() {
-    console.info("Ion View Will Enter?");
+    console.info("Ion View Will Enter Split 2");
     this.sideMenuCtrl.setRoot(MenuLevel1);
     this.contentCtrl.setRoot(HomePage);
   }
@@ -70,6 +70,11 @@ export class SplitPage2 {
      */
     this.pushSubjectSubscription.unsubscribe();
     this.rootSubjectSubscription.unsubscribe();
+  }
+
+  ionViewDidEnter() {
+    // This have to be present to get menu to display after navigation between other tabs with menus
+    this.menuCtrl.enable(true, "menu2");
   }
 
 }
