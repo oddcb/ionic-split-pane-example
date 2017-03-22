@@ -5,6 +5,7 @@ import {SplitCommunication} from "./SplitCommunication";
 import {MenuController, NavController} from "ionic-angular";
 import {AboutPage} from "../about/about";
 import {ContactPage} from "../contact/contact";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'split-page',
@@ -15,12 +16,24 @@ export class SplitPage {
   menuLevelOne = MenuLevel1;
   contentArea = HomePage;
 
+  rootSubjectSubscription: Subscription;
+  pushSubjectSubscription: Subscription;
+
+
   @ViewChild("sideMenu") sideMenuCtrl: NavController;
   @ViewChild("content") contentCtrl: NavController;
 
-  constructor(private splitCommunication: SplitCommunication, private menuCtrl:MenuController) {
-    this.splitCommunication.rootSubject$.subscribe((page) => {
-      console.info(`Displaying ${page}`);
+  constructor(private splitCommunication: SplitCommunication, private menuCtrl: MenuController) {}
+
+  ionViewWillEnter() {
+    console.info("Ion View Will Enter?");
+    this.sideMenuCtrl.setRoot(MenuLevel1);
+    this.contentCtrl.setRoot(HomePage);
+  }
+
+  ionViewWillLoad() {
+    this.rootSubjectSubscription = this.splitCommunication.rootSubject$.subscribe((page) => {
+      console.info(`Displaying ${page} with setRoot`);
       switch (page) {
         case 'home':
           this.contentCtrl.setRoot(HomePage);
@@ -34,8 +47,8 @@ export class SplitPage {
       }
     });
 
-    this.splitCommunication.pushSubject$.subscribe((page) => {
-      console.info(`Displaying ${page}`);
+    this.pushSubjectSubscription = this.splitCommunication.pushSubject$.subscribe((page) => {
+      console.info(`Displaying ${page} with Push`);
       switch (page) {
         case 'home':
           this.contentCtrl.push(HomePage);
@@ -50,10 +63,13 @@ export class SplitPage {
     })
   }
 
-  ionViewWillEnter() {
-    console.info("Ion View Will Enter?");
-    this.sideMenuCtrl.setRoot(MenuLevel1);
-    this.contentCtrl.setRoot(HomePage);
+  ionViewWillUnload() {
+    /* Make sure we unsubscribe. If this page is destroyed the subscription will still be alive
+     and react to the events from split communication. This again will lead to push/setRoot on a NavController stack
+     that doesn't exist anymore (null error for _queueTrns in NavBaseController
+     */
+    this.pushSubjectSubscription.unsubscribe();
+    this.rootSubjectSubscription.unsubscribe();
   }
 
   ionViewDidEnter() {
