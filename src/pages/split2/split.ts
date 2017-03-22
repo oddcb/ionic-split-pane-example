@@ -23,7 +23,8 @@ export class SplitPage2 {
   @ViewChild("sideMenu") sideMenuCtrl: NavController;
   @ViewChild("content") contentCtrl: NavController;
 
-  constructor(private splitCommunication: SplitCommunication, private menuCtrl: MenuController) {}
+  constructor(private splitCommunication: SplitCommunication, private menuCtrl: MenuController) {
+  }
 
   ionViewWillEnter() {
     console.info("Ion View Will Enter Split 2");
@@ -47,19 +48,9 @@ export class SplitPage2 {
       }
     });
 
-    this.pushSubjectSubscription = this.splitCommunication.pushSubject$.subscribe((page) => {
-      console.info(`Displaying ${page} with Push`);
-      switch (page) {
-        case 'home':
-          this.contentCtrl.push(HomePage);
-          break;
-        case 'about':
-          this.contentCtrl.push(AboutPage);
-          break;
-        default:
-          this.contentCtrl.push(ContactPage);
-          break;
-      }
+    this.pushSubjectSubscription = this.splitCommunication.pushSubject$.subscribe((pageWithContext) => {
+      console.info(`Displaying ${JSON.stringify(pageWithContext)} with Push`);
+      this.contentCtrl.push(pageWithContext.page, {pageData: pageWithContext.data});
     })
   }
 

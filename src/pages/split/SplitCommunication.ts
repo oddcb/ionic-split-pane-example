@@ -7,7 +7,7 @@ export class SplitCommunication {
   rootSubject = new Subject<any>();
   rootSubject$ = this.rootSubject.asObservable();
 
-  pushSubject = new Subject<any>();
+  pushSubject = new Subject<PageWithContext>();
   pushSubject$ = this.pushSubject.asObservable();
 
   setAppComponentRoot = new Subject<any>();
@@ -17,7 +17,12 @@ export class SplitCommunication {
     this.rootSubject.next(page);
   }
 
-  pushPage(page:string) {
+  pushPage(page:PageWithContext) {
     this.pushSubject.next(page);
   }
+}
+
+export interface PageWithContext {
+  page:any;
+  data:any;
 }
